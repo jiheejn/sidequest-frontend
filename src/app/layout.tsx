@@ -1,20 +1,46 @@
-import "./globals.css";
-import { Inter } from "next/font/google";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { NavBar } from "@/components/NavBar"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
-    title: "SideQuest",
-    description: "Developer community platform",
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <html lang="en">
-        <body className={inter.className}>{children}</body>
-        </html>
-    );
+export const metadata: Metadata = {
+    title: "게시판",
+    description: "포트폴리오 게시판 프로젝트",
 }
+
+export default function RootLayout({
+                                       children,
+                                   }: {
+    children: React.ReactNode
+}) {
+    return (
+        <html lang="ko">
+        <body className={inter.className}>
+        <NavBar />
+        <main>{children}</main>
+        </body>
+        </html>
+    )
+}
+// import "./globals.css";
+// import { Inter } from "next/font/google";
+//
+// const inter = Inter({ subsets: ["latin"] });
+//
+// export const metadata = {
+//     title: "SideQuest",
+//     description: "Developer community platform",
+// };
+//
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
+//     return (
+//         <html lang="en">
+//         <body className={inter.className}>{children}</body>
+//         </html>
+//     );
+// }
 
 
 
