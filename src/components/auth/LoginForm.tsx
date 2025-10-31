@@ -1,44 +1,39 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {useState} from "react";
-import {authClient} from "@/lib/auth-client";
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
-import {Button} from "@/components/ui/button";
-import {Loader2} from "lucide-react";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/app/store/authStore"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Loader2 } from "lucide-react"
 
-export function LoginForm(){
+export function LoginForm() {
     const router = useRouter()
+    const login = useAuthStore((state) => state.login)
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     })
-    const [error, setError] = useState((""))
+    const [error, setError] = useState("")
 
-    //Form Submission 기본 구조.
-    //e.preventDefault() 페이지 새로고침을 막음
-    //setIsLoading(true)
-    const handleSubmit = async (e: React.FormEvent)=>{
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
         setError("")
 
-        try{
-            await authClient.signIn.email({
-                email: formData.email,
-                password: formData.password,
-            })
-            router.push("/")
+        try {
+            await login(formData.email, formData.password)
+            router.push("/posts")
             router.refresh()
-        } catch (err: any){
-            setError((err.message||"Login failed"))
+        } catch (err: any) {
+            setError(err.message || "Login failed")
         } finally {
             setIsLoading(false)
         }
-
     }
+
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -48,7 +43,7 @@ export function LoginForm(){
             )}
 
             <div className="space-y-2">
-                <Label htmlFor="email">email</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
                     id="email"
                     type="email"
@@ -61,7 +56,7 @@ export function LoginForm(){
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="password">password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                     id="password"
                     type="password"
@@ -80,4 +75,3 @@ export function LoginForm(){
         </form>
     )
 }
-

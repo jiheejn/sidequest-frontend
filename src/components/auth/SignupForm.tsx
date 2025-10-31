@@ -1,27 +1,22 @@
 "use client"
 
-//1.사용자가 이메일 닉네임 비번 입력
-//2. auth.signup.email호출->POST /api/auth/sign-up/email
-//3. Better-auth가: 비밀번호 해싱(bcrypt) PostgreSQL user 테이블에 저장
-//4. 자동 로그인(signIn.email)
-//5. 세션 생성 + 쿠키 설정
-//6. 홈으로 리다이렉트
-import {useRouter} from "next/navigation";
-import {useState} from "react";
-import {authClient} from "@/lib/auth-client";
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {Loader2} from "lucide-react";
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/app/store/authStore"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Loader2 } from "lucide-react"
 
-export function SignupForm(){
+export function SignupForm() {
     const router = useRouter()
+    const signup = useAuthStore((state) => state.signup)
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
-        nickname:"",
-        password:"",
-        confirmPassword:"",
+        nickname: "",
+        password: "",
+        confirmPassword: "",
     })
     const [error, setError] = useState("")
 
@@ -30,34 +25,24 @@ export function SignupForm(){
         setIsLoading(true)
         setError("")
 
-        if(formData.password !== formData.confirmPassword) {
-            setError("Password does not match")
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match")
             setIsLoading(false)
             return
         }
 
-        if(formData.password.length<8){
-            setError("Password must be longer than 8 characters")
+        if (formData.password.length < 8) {
+            setError("Password must be at least 8 characters")
             setIsLoading(false)
             return
         }
 
-        try{
-            await authClient.signUp.email({
-                email: formData.email,
-                password: formData.password,
-                name: formData.nickname,
-            })
-            // 자동 로그인
-            await authClient.signIn.email({
-                email: formData.email,
-                password: formData.password,
-            })
-
-            router.push("/")
+        try {
+            await signup(formData.email, formData.password, formData.nickname)
+            router.push("/posts") // 메인 페이지로
             router.refresh()
         } catch (err: any) {
-            setError(err.message || "회원가입에 실패했습니다")
+            setError(err.message || "Sign up failed")
         } finally {
             setIsLoading(false)
         }
@@ -72,7 +57,7 @@ export function SignupForm(){
             )}
 
             <div className="space-y-2">
-                <Label htmlFor="email">이메일</Label>
+                <Label htmlFor="email">Email</Label>
                 <Input
                     id="email"
                     type="email"
@@ -85,11 +70,11 @@ export function SignupForm(){
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="nickname">닉네임</Label>
+                <Label htmlFor="nickname">Nickname</Label>
                 <Input
                     id="nickname"
                     type="text"
-                    placeholder="홍길동"
+                    placeholder="Your nickname"
                     value={formData.nickname}
                     onChange={(e) => setFormData({ ...formData, nickname: e.target.value })}
                     disabled={isLoading}
@@ -98,7 +83,7 @@ export function SignupForm(){
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="password">비밀번호</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                     id="password"
                     type="password"
@@ -108,11 +93,11 @@ export function SignupForm(){
                     disabled={isLoading}
                     required
                 />
-                <p className="text-xs text-muted-foreground">최소 8자 이상</p>
+                <p className="text-xs text-muted-foreground">At least 8 characters</p>
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="confirmPassword">비밀번호 확인</Label>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <Input
                     id="confirmPassword"
                     type="password"
@@ -126,7 +111,7 @@ export function SignupForm(){
 
             <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-                회원가입
+                Sign Up
             </Button>
         </form>
     )

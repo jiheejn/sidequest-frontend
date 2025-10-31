@@ -9,7 +9,7 @@ export default function SignupPage() {
                 <div className="bg-white dark:bg-slate-950 rounded-lg shadow-lg p-8 space-y-6">
                     {/* 헤더 */}
                     <div className="text-center space-y-2">
-                        <h1 className="text-2xl font-bold">회원가입</h1>
+                        <h1 className="text-2xl font-bold">Join Clink. </h1>
                         <p className="text-sm text-muted-foreground">
                             새 계정을 만들어 시작하세요
                         </p>
@@ -25,19 +25,19 @@ export default function SignupPage() {
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-white dark:bg-slate-950 px-2 text-muted-foreground">
-                또는
+                or
               </span>
                         </div>
                     </div>
 
                     {/* 소셜 회원가입 */}
-                    <SocialButtons callbackURL="/" />
+                    <SocialButtons />
 
                     {/* 로그인 링크 */}
                     <div className="text-center text-sm">
-                        <span className="text-muted-foreground">이미 계정이 있으신가요? </span>
+                        <span className="text-muted-foreground">Already have an account? </span>
                         <Link href="/login" className="text-primary hover:underline font-medium">
-                            로그인
+                            Sign in
                         </Link>
                     </div>
                 </div>

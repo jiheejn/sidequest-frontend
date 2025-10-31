@@ -3,4 +3,5 @@ export interface User{
     email: string;
     nickname: string;
     authenticated: boolean;
+    image?: string;
 }
