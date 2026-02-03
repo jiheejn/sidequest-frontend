@@ -1,4 +1,7 @@
 "use client"
+
+export const dynamic = 'force-dynamic';
+
 // Custom Hooks
 import { usePosts } from "@/hooks/usePosts"; // 게시글 데이터 로딩
 import { useFilterData } from "@/hooks/useFilterData"; // 필터 옵션(태그, 포지션) 로딩
@@ -12,8 +15,6 @@ import { FilterBar } from "@/components/FilterBar"; // 필터 바
 
 
 import {useAuthStore} from "@/app/store/authStore";
-
-export const dynamic = 'force-dynamic';
 
 export default function TeamBuildPage() {
     // --- Custom Hooks 호출 ---
