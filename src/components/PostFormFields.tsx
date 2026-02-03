@@ -43,9 +43,8 @@ export function PostFormFields({
             <Input
                 value={title}
                 onChange={(e) => onTitleChange(e.target.value)}
-                placeholder="Project Title Here..."
-                className="h-14 border-none text-3xl font-bold focus-visible:ring-0 px-0 shadow-none"
-                disabled={disabled}
+                placeholder="Title"
+                className="w-full placeholder:text-muted-foreground/50 text-3xl md:text-5xl lg:text-5xl border-none font-bold focus-visible:ring-0 px-0 shadow-none"                disabled={disabled}
                 required
             />
 

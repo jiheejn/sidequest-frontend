@@ -4,11 +4,15 @@ import { SocialButtons } from "@/components/auth/SocialButtons"
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
+        // 배경 그라데이션 제거 -> bg-background로 변경
+        <div className="min-h-screen flex items-center justify-center bg-background p-4">
             <div className="w-full max-w-md">
-                <div className="bg-white dark:bg-slate-950 rounded-lg shadow-lg p-8 space-y-6">
+                {/* shadow-lg 제거, border-border/50 추가, bg-card로 변경 */}
+                <div className="bg-card rounded-xl border border-border/50 p-8 space-y-6">
                     <div className="text-center space-y-2">
-                        <h1 className="text-2xl font-bold">Welcome Back</h1>
+                        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                            Welcome Back
+                        </h1>
                         <p className="text-sm text-muted-foreground">
                             Sign in to continue to SideQuest
                         </p>
@@ -18,12 +22,14 @@ export default function LoginPage() {
 
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t" />
+                            {/* 구분선 색상도 border/50으로 통일 */}
+                            <span className="w-full border-t border-border/50" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white dark:bg-slate-950 px-2 text-muted-foreground">
-                Or continue with
-              </span>
+                            {/* 배경색을 카드의 배경색(bg-card)과 일치시켜 선이 겹치지 않게 함 */}
+                            <span className="bg-card px-2 text-muted-foreground">
+                                Or continue with
+                            </span>
                         </div>
                     </div>
 
@@ -40,4 +46,3 @@ export default function LoginPage() {
         </div>
     )
 }
-

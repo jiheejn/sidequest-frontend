@@ -4,14 +4,18 @@ import { SocialButtons } from "@/components/auth/SocialButtons"
 
 export default function SignupPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-4">
+        // bg-gradient 제거 -> bg-background로 변경
+        <div className="min-h-screen flex items-center justify-center bg-background p-4">
             <div className="w-full max-w-md">
-                <div className="bg-white dark:bg-slate-950 rounded-lg shadow-lg p-8 space-y-6">
+                {/* shadow-lg 제거, border 추가, bg-white -> bg-card로 변경 */}
+                <div className="bg-card rounded-xl border border-border/50 p-8 space-y-6">
                     {/* 헤더 */}
                     <div className="text-center space-y-2">
-                        <h1 className="text-2xl font-bold">Join Clink. </h1>
+                        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                            Join Giggles today.
+                        </h1>
                         <p className="text-sm text-muted-foreground">
-                            새 계정을 만들어 시작하세요
+                            Create an account to get started.
                         </p>
                     </div>
 
@@ -21,12 +25,14 @@ export default function SignupPage() {
                     {/* 구분선 */}
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t" />
+                            {/* border-t의 투명도 조절 */}
+                            <span className="w-full border-t border-border/50" />
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white dark:bg-slate-950 px-2 text-muted-foreground">
-                or
-              </span>
+                            {/* bg-white -> bg-card로 변경하여 일치시킴 */}
+                            <span className="bg-card px-2 text-muted-foreground">
+                                or
+                            </span>
                         </div>
                     </div>
 

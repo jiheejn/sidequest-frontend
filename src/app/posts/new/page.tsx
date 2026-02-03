@@ -1,4 +1,3 @@
-// app/posts/new/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -43,7 +42,6 @@ export default function CreatePostPage() {
         }
         if (!content.replace(/<(.|\n)*?>/g, "").trim()) {
             setError("Content cannot be empty.")
-            return
         }
         if (!selectedPositionId) {
             setError("Please select a Position.")
@@ -75,55 +73,62 @@ export default function CreatePostPage() {
     if (authLoading || dataLoading) {
         return (
             <div className="container mx-auto px-4 py-8 max-w-4xl">
-                <Skeleton className="h-12 w-1/2 mb-4" />
-                <Skeleton className="h-8 w-3/4 mb-8" />
-                <Skeleton className="h-16 w-full mb-6" />
+                <Skeleton className="h-16 w-full mb-8" />
                 <Skeleton className="h-64 w-full" />
             </div>
         )
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-4xl">
-            <header className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-                <div>
-                    <h1 className="text-4xl font-extrabold tracking-tight">
-                        Create New Project Post
-                    </h1>
-                    <p className="text-muted-foreground mt-2">
-                        Find amazing people to build with.
-                    </p>
+        <div className="container mx-auto px-4 py-12 max-w-4xl">
+            {/* 상단 에러 메시지 */}
+            {(error || dataError) && (
+                <div className="mb-6 p-4 rounded-lg bg-destructive/10 text-destructive text-sm font-medium">
+                    {error || dataError}
                 </div>
-                <div className="flex gap-4 mt-4 md:mt-0">
-                    <Button variant="outline" onClick={() => router.back()} disabled={isSubmitting}>
+            )}
+
+            {/* 폼 필드 영역 */}
+            <div className="space-y-8">
+                <PostFormFields
+                    title={title}
+                    content={content}
+                    recruitStatus={recruitStatus}
+                    selectedPositionId={selectedPositionId}
+                    selectedTags={selectedTags}
+                    positions={positions}
+                    tags={tags}
+                    onTitleChange={setTitle}
+                    onContentChange={setContent}
+                    onRecruitStatusChange={setRecruitStatus}
+                    onPositionSelect={setSelectedPositionId}
+                    onTagToggle={handleTagToggle}
+                    disabled={isSubmitting}
+                    // 아래는 PostFormFields 내부에서 스타일로 적용해야 함을 알리기 위한 주석입니다.
+                    // titleClassName="text-4xl md:text-5xl font-bold border-none px-0 focus-visible:ring-0 placeholder:text-muted-foreground/30"
+                />
+
+                {/* 하단 버튼 영역 */}
+                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
+                    <Button
+                        variant="ghost"
+                        onClick={() => router.back()}
+                        disabled={isSubmitting}
+                        className="text-muted-foreground hover:text-background"
+                    >
                         Cancel
                     </Button>
-                    <Button onClick={handleSubmit} disabled={isSubmitting}>
+                    <Button
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        size="lg"
+                        className="px-8 font-semibold"
+                    >
                         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                         Publish Post
                     </Button>
                 </div>
-            </header>
-
-            {(error || dataError) && (
-                <p className="mb-4 text-sm text-destructive">{error || dataError}</p>
-            )}
-
-            <PostFormFields
-                title={title}
-                content={content}
-                recruitStatus={recruitStatus}
-                selectedPositionId={selectedPositionId}
-                selectedTags={selectedTags}
-                positions={positions}
-                tags={tags}
-                onTitleChange={setTitle}
-                onContentChange={setContent}
-                onRecruitStatusChange={setRecruitStatus}
-                onPositionSelect={setSelectedPositionId}
-                onTagToggle={handleTagToggle}
-                disabled={isSubmitting}
-            />
+            </div>
         </div>
     )
 }

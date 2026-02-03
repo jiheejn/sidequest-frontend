@@ -16,7 +16,7 @@ import { FilterBar } from "@/components/FilterBar"; // 필터 바
 import { Anta } from "next/font/google";
 import {bookmarkApi} from "@/lib/api-client";
 import {useAuthStore} from "@/app/store/authStore";
-const anta = Anta({ weight: "400", subsets: ['latin'] }); // subset 추가 권장
+// const anta = Anta({ weight: "400", subsets: ['latin'] }); // subset 추가 권장
 
 export default function TeamBuildPage() {
     // --- Custom Hooks 호출 ---
@@ -53,8 +53,8 @@ export default function TeamBuildPage() {
     return (
         <div className="container mx-auto max-w-5xl py-8">
             {/* 페이지 제목 */}
-            <h1 className={`${anta.className} text-4xl mb-4 tracking-tight text-foreground`}>Find your team.</h1>
-            <p className="text-muted-foreground mb-8">Discover projects and connect with creators.</p>
+            <h1 className={`font-medium text-4xl mt-6 mb-2 tracking-tighter text-foreground`}>Find your team.</h1>
+            <p className="text-muted-foreground mb-12">Discover projects and connect with creators.</p>
 
             {/* 필터 바 */}
             <div className="mb-8">
