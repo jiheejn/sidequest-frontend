@@ -1,6 +1,4 @@
 "use client"
-import {useMemo, useState} from "react"; // useMemo는 usePosts 훅 안에서 사용됨
-
 // Custom Hooks
 import { usePosts } from "@/hooks/usePosts"; // 게시글 데이터 로딩
 import { useFilterData } from "@/hooks/useFilterData"; // 필터 옵션(태그, 포지션) 로딩
@@ -12,11 +10,10 @@ import { Pagination } from "@/components/Pagination"; // 페이지네이션
 import { Skeleton } from "@/components/ui/skeleton"; // 로딩 스켈레톤
 import { FilterBar } from "@/components/FilterBar"; // 필터 바
 
-// Fonts (이전 코드에서 가져옴)
-import { Anta } from "next/font/google";
-import {bookmarkApi} from "@/lib/api-client";
+
 import {useAuthStore} from "@/app/store/authStore";
-// const anta = Anta({ weight: "400", subsets: ['latin'] }); // subset 추가 권장
+
+export const dynamic = 'force-dynamic';
 
 export default function TeamBuildPage() {
     // --- Custom Hooks 호출 ---
