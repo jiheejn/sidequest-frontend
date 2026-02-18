@@ -4,34 +4,30 @@ import Link from "next/link"
 import {Bookmark, Eye, MessageSquare} from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import { enUS } from "date-fns/locale"
-import {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
+import {useState} from "react";
 import {useAuthStore} from "@/app/store/authStore";
 import {RecruitStatusBadge} from "@/components/RecruitStatusBadge";
 import {bookmarkApi} from "@/lib/api-client";
-//독일 시간 기준으로 만들건데 페이지는 영어여야함!
 
-// 백엔드 PostListDto와 일치하는 타입 정의
 interface PostListDto {
     id: number;
     title: string;
-    recruitStatus?: 'OPEN' | 'CLOSED'; // 백엔드 DTO에 있다면 추가
+    recruitStatus?: 'OPEN' | 'CLOSED';
     position: { id: number; name: string };
     tags: { id: number; name: string }[];
     author: {
-        userId: number; // author_id 대신 userId 사용 (백엔드 DTO 기준)
+        userId: number;
         nickname: string;
-        image?: string; // author_image 대신 image 사용 (백엔드 DTO 기준)
+        image?: string;
     };
-    viewCount: number; // 백엔드 타입이 Long이면 number로 충분
-    commentCount: number; // 백엔드 타입이 Integer면 number로 충분
-    createdAt: string; // ISO String format
-    isBookmarked?: boolean;//북마크
+    viewCount: number;
+    commentCount: number;
+    createdAt: string;
+    isBookmarked?: boolean;
 }
 
 interface PostListItemProps {
     post: PostListDto
-    //onBookmarkToggle?: (postId:number) => void
 }
 
 export function PostListItem({ post }: PostListItemProps) {
@@ -61,72 +57,56 @@ export function PostListItem({ post }: PostListItemProps) {
 
     return (
         <Link href={`/posts/${post.id}`} className="block group">
-            <div className="
-                relative p-6 bg-card rounded-md
-                border-2 border-border
-                shadow-[3px_3px_0px_0px] shadow-border/20
-                transition-all duration-150 ease-in-out
-                hover:shadow-[1px_1px_0px_0px] hover:shadow-border/20 hover:translate-x-[2px] hover:translate-y-[2px]
-            ">
-                {/* 북마크 버튼 */}
+            <div className="relative p-5 bg-card rounded-xl border border-border
+                          transition-colors duration-200 hover:border-foreground/20">
+                {/* Bookmark */}
                 <button
                     onClick={handleBookmarkClick}
                     disabled={isBookmarking}
-                    className="
-                        absolute top-4 right-4 p-2 rounded-md
-                        transition-all duration-150
-                        hover:bg-primary/10
-                        disabled:opacity-50 disabled:cursor-not-allowed
-                        z-10
-                    "
+                    className="absolute top-4 right-4 p-1.5 rounded-lg
+                             transition-colors hover:bg-secondary
+                             disabled:opacity-50 disabled:cursor-not-allowed z-10"
                     aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
                 >
                     <Bookmark
-                        className={`h-5 w-5 transition-colors ${
+                        className={`h-4 w-4 transition-colors ${
                             isBookmarked
-                                ? "fill-primary text-primary"
-                                : "text-muted-foreground hover:text-primary"
+                                ? "fill-accent text-accent"
+                                : "text-muted-foreground group-hover:text-foreground"
                         }`}
                     />
                 </button>
 
-                {/* 상단: 포지션 및 태그 */}
-                <div className="mb-4 flex flex-wrap items-center gap-2 pr-12">
+                {/* Tags row */}
+                <div className="mb-3 flex flex-wrap items-center gap-1.5 pr-10">
                     <RecruitStatusBadge status={post.recruitStatus || 'OPEN'} />
-                    <span className="
-                        inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wide
-                        bg-secondary/20 text-secondary border border-secondary/40
-                    ">
+                    <span className="inline-block px-2 py-0.5 rounded-md text-xs font-medium
+                                   bg-accent/10 text-accent-foreground">
                         {post.position.name}
                     </span>
                     {post.tags?.slice(0, 4).map(tag => (
-                        <span key={tag.id} className="
-                            inline-block px-3 py-1 rounded-md text-xs font-medium
-                            bg-muted text-muted-foreground border border-border
-                        ">
+                        <span key={tag.id} className="inline-block px-2 py-0.5 rounded-md text-xs
+                                                     text-muted-foreground bg-secondary">
                             {tag.name}
                         </span>
                     ))}
                     {post.tags?.length > 3 && (
                         <span className="text-xs text-muted-foreground">
-                            +{post.tags.length - 3} more
+                            +{post.tags.length - 3}
                         </span>
                     )}
                 </div>
 
-                {/* 중앙: 제목 */}
-                <h2 className="
-                    mb-4 text-xl font-bold text-foreground
-                    line-clamp-2
-                    transition-colors group-hover:text-primary
-                ">
+                {/* Title */}
+                <h2 className="mb-3 text-base font-semibold text-foreground leading-snug
+                             line-clamp-2 group-hover:text-accent-foreground transition-colors">
                     {post.title}
                 </h2>
 
-                {/* 하단: 작성자 정보 및 메타데이터 */}
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                {/* Footer */}
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <div className="flex items-center gap-2">
-                        <div className="h-6 w-6 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center">
+                        <div className="h-5 w-5 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
                             {post.author.image ? (
                                 <img
                                     src={post.author.image}
@@ -134,24 +114,24 @@ export function PostListItem({ post }: PostListItemProps) {
                                     className="h-full w-full object-cover"
                                 />
                             ) : (
-                                <span className="text-xs font-semibold text-primary">
+                                <span className="text-[10px] font-medium text-foreground">
                                     {post.author.nickname[0].toUpperCase()}
                                 </span>
                             )}
                         </div>
-                        <span className="font-medium text-foreground/80 group-hover:text-foreground transition-colors">
+                        <span className="text-foreground/70">
                             {post.author.nickname}
                         </span>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                         <span>{timeAgo}</span>
                         <span className="flex items-center gap-1">
-                            <Eye className="h-4 w-4" />
+                            <Eye className="h-3.5 w-3.5" />
                             {post.viewCount}
                         </span>
                         <span className="flex items-center gap-1">
-                            <MessageSquare className="h-4 w-4" />
+                            <MessageSquare className="h-3.5 w-3.5" />
                             {post.commentCount}
                         </span>
                     </div>

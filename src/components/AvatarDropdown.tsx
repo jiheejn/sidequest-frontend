@@ -1,4 +1,3 @@
-// components/AvatarDropdown.tsx
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -13,7 +12,6 @@ export function AvatarDropdown() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // 외부 클릭 감지
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -39,14 +37,12 @@ export function AvatarDropdown() {
 
     return (
         <div className="relative" ref={dropdownRef}>
-            {/* Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-md
-                         hover:bg-primary/10 transition-colors outline-none"
+                className="flex items-center gap-2 px-2 py-1.5 rounded-lg
+                         hover:bg-secondary transition-colors outline-none"
             >
-                {/* Avatar */}
-                <div className="h-8 w-8 rounded-full overflow-hidden bg-primary/20
+                <div className="h-7 w-7 rounded-full overflow-hidden bg-secondary
                               flex items-center justify-center">
                     {user.image ? (
                         <img
@@ -55,39 +51,37 @@ export function AvatarDropdown() {
                             className="h-full w-full object-cover"
                         />
                     ) : (
-                        <span className="text-sm font-semibold text-primary">
+                        <span className="text-xs font-medium text-foreground">
                             {user.nickname[0].toUpperCase()}
                         </span>
                     )}
                 </div>
-                {/* Name */}
-                <span className="text-sm font-medium text-foreground hidden sm:block">
+                <span className="text-sm text-foreground hidden sm:block">
                     {user.nickname}
                 </span>
-                {/* Arrow */}
-                <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform
+                <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform
                     ${isOpen ? "rotate-180" : ""}`} />
             </button>
 
-            {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md bg-card border-2 border-border
-                              shadow-[3px_3px_0px_0px] shadow-border/20 overflow-hidden z-50">
+                <div className="absolute right-0 mt-1 w-44 rounded-xl bg-card border border-border
+                              shadow-lg overflow-hidden z-50">
                     <button
                         onClick={() => {
                             setIsOpen(false);
                             router.push("/profile");
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-foreground
-                                 hover:bg-primary/10 transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground
+                                 hover:bg-secondary transition-colors"
                     >
-                        <User className="h-4 w-4" />
+                        <User className="h-4 w-4 text-muted-foreground" />
                         <span>Profile</span>
                     </button>
+                    <div className="h-px bg-border" />
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-destructive
-                                 hover:bg-destructive/10 transition-colors border-t-2 border-border"
+                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-destructive
+                                 hover:bg-secondary transition-colors"
                     >
                         <LogOut className="h-4 w-4" />
                         <span>Logout</span>

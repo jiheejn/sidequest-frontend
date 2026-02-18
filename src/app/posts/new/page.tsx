@@ -109,12 +109,12 @@ export default function CreatePostPage() {
                 />
 
                 {/* 하단 버튼 영역 */}
-                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
+                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border">
                     <Button
                         variant="ghost"
                         onClick={() => router.back()}
                         disabled={isSubmitting}
-                        className="text-muted-foreground hover:text-background"
+                        className="text-muted-foreground"
                     >
                         Cancel
                     </Button>

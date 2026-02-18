@@ -14,12 +14,11 @@ export function FilterButton({ onClick, isActive, children }: FilterButtonProps)
             type="button"
             onClick={onClick}
             className={`
-                shrink-0 rounded-md px-4 py-1.5 text-xs font-bold uppercase tracking-wide transition-all duration-150
-                border-2
+                shrink-0 rounded-full px-3 py-1 text-xs font-medium transition-colors
                 ${
                 isActive
-                    ? "bg-primary text-primary-foreground border-primary/60 shadow-[2px_2px_0px_0px] shadow-primary/25"
-                    : "bg-muted/40 border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    ? "bg-foreground text-background"
+                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
             }
             `}
         >

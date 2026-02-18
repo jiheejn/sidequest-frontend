@@ -24,8 +24,8 @@ function TeamBuildContent() {
 
     return (
         <div className="container mx-auto max-w-5xl py-8">
-            <h1 className="font-black text-4xl mt-6 mb-2 tracking-tighter text-foreground uppercase">Find your team.</h1>
-            <p className="text-muted-foreground mb-12 font-medium">Discover projects and connect with creators.</p>
+            <h1 className="font-semibold text-3xl mt-6 mb-1 tracking-tight text-foreground">Find your team</h1>
+            <p className="text-muted-foreground mb-10 text-sm">Discover projects and connect with creators.</p>
 
             <div className="mb-8">
                 {isFilterLoading ? (

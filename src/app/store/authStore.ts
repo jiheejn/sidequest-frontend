@@ -112,7 +112,11 @@ export const useAuthStore = create<AuthState>()(
         { name: 'auth-store'}
     )
 )
-//앱시작시 자동으로 사용자 정보 로드
-if (typeof window !== 'undefined'){
-    useAuthStore.getState().fetchCurrentUser()
+// Load user info automatically on app start (deferred to avoid blocking module evaluation)
+if (typeof window !== 'undefined') {
+    // Use setTimeout to defer the fetch so it doesn't block module evaluation
+    // and doesn't crash if the backend is unreachable
+    setTimeout(() => {
+        useAuthStore.getState().fetchCurrentUser()
+    }, 0)
 }

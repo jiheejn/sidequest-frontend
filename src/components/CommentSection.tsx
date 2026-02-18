@@ -1,8 +1,7 @@
-// components/CommentSection.tsx
 "use client"
 
 import { useState } from "react"
-import { useAuthStore } from "@/app/store/authStore" // Ensure this path is correct
+import { useAuthStore } from "@/app/store/authStore"
 import { useRouter } from "next/navigation"
 import { formatDistanceToNow } from "date-fns"
 import { enUS } from "date-fns/locale"
@@ -30,12 +29,7 @@ export function CommentSection({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!user) {
-            router.push("/login");
-            return;
-        }
-
+        if (!user) { router.push("/login"); return; }
         if (!newComment.trim() || isSubmitting) return;
 
         setIsSubmitting(true);
@@ -53,7 +47,6 @@ export function CommentSection({
 
     const handleDelete = async (commentId: number) => {
         if (!confirm("Delete this comment?")) return;
-
         try {
             await commentApi.deleteComment(postId, commentId);
             onCommentChanged();
@@ -65,7 +58,6 @@ export function CommentSection({
 
     const handleEdit = async (commentId: number) => {
         if (!editContent.trim()) return;
-
         try {
             await commentApi.updateComment(postId, commentId, { content: editContent });
             setEditingId(null);
@@ -78,122 +70,110 @@ export function CommentSection({
     };
 
     return (
-        <div className="mt-12 space-y-6">
-            {/* Header */}
-            <div className="flex items-center gap-2 pb-4 border-b-2 border-border">
-                <MessageSquare className="h-5 w-5 text-primary" />
-                <h2 className="text-xl font-black text-foreground uppercase tracking-tight">
+        <div className="space-y-6">
+            <div className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                <h2 className="text-sm font-medium text-foreground">
                     Comments ({comments.length})
                 </h2>
             </div>
 
-            {/* Comment Form */}
             <form onSubmit={handleSubmit} className="space-y-3">
                 <textarea
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder={user ? "Write a comment..." : "Please login to comment"}
                     disabled={!user || isSubmitting}
-                    className="w-full min-h-[100px] p-4 rounded-md bg-muted/30 border-2 border-border
-                             text-foreground placeholder:text-muted-foreground font-medium
-                             focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
-                             disabled:opacity-50 disabled:cursor-not-allowed
-                             resize-none"
+                    className="w-full min-h-[88px] p-3 rounded-lg bg-background border border-border
+                             text-foreground text-sm placeholder:text-muted-foreground
+                             focus:outline-none focus:border-foreground/30 focus:ring-1 focus:ring-ring/20
+                             disabled:opacity-50 disabled:cursor-not-allowed resize-none"
                 />
                 <div className="flex justify-end">
                     <button
                         type="submit"
                         disabled={!user || !newComment.trim() || isSubmitting}
-                        className="px-6 py-2 rounded-md bg-primary text-primary-foreground
-                                 font-bold uppercase tracking-wide text-sm border-2 border-primary/60
-                                 shadow-[2px_2px_0px_0px] shadow-primary/30
-                                 hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
-                                 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-1.5 rounded-lg bg-primary text-primary-foreground
+                                 text-sm font-medium hover:bg-primary/90
+                                 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {isSubmitting ? "Posting..." : "Post Comment"}
+                        {isSubmitting ? "Posting..." : "Post"}
                     </button>
                 </div>
             </form>
 
-            {/* Comments List */}
-            <div className="space-y-4">
+            <div className="space-y-3">
                 {comments.length === 0 ? (
-                    <p className="text-center text-muted-foreground py-8">
+                    <p className="text-center text-muted-foreground text-sm py-8">
                         No comments yet. Be the first to comment!
                     </p>
                 ) : (
                     comments.map((comment) => (
                         <div
                             key={comment.id}
-                            className="p-4 rounded-md bg-card border-2 border-border"
+                            className="p-4 rounded-lg bg-background border border-border"
                         >
-                            {/* Comment Header */}
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
-                                    <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
-                                        <span className="text-sm font-semibold text-primary">
+                                    <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center">
+                                        <span className="text-[10px] font-medium text-foreground">
                                             {comment.authorNickname[0].toUpperCase()}
                                         </span>
                                     </div>
-                                    <div>
-                                        <p className="font-medium text-foreground">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm font-medium text-foreground">
                                             {comment.authorNickname}
-                                        </p>
-                                        <p className="text-xs text-muted-foreground">
+                                        </span>
+                                        <span className="text-xs text-muted-foreground">
                                             {formatDistanceToNow(new Date(comment.createdAt), {
                                                 addSuffix: true,
                                                 locale: enUS,
                                             })}
-                                        </p>
+                                        </span>
                                     </div>
                                 </div>
 
-                                {/* Edit/Delete buttons */}
                                 {user?.userId === comment.authorId && (
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-1">
                                         <button
                                             onClick={() => {
                                                 setEditingId(comment.id);
                                                 setEditContent(comment.content);
                                             }}
-                                            className="p-1 text-muted-foreground hover:text-primary transition-colors"
+                                            className="p-1 text-muted-foreground hover:text-foreground transition-colors rounded"
                                         >
-                                            <Edit2 className="h-4 w-4" />
+                                            <Edit2 className="h-3.5 w-3.5" />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(comment.id)}
-                                            className="p-1 text-muted-foreground hover:text-destructive transition-colors"
+                                            className="p-1 text-muted-foreground hover:text-destructive transition-colors rounded"
                                         >
-                                            <Trash2 className="h-4 w-4" />
+                                            <Trash2 className="h-3.5 w-3.5" />
                                         </button>
                                     </div>
                                 )}
                             </div>
 
-                            {/* Comment Content */}
                             {editingId === comment.id ? (
                                 <div className="space-y-2">
                                     <textarea
                                         value={editContent}
                                         onChange={(e) => setEditContent(e.target.value)}
-                                        className="w-full min-h-[80px] p-3 rounded-lg bg-background border border-border/20
-                                                 text-foreground resize-none
-                                                 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                                        className="w-full min-h-[72px] p-3 rounded-lg bg-card border border-border
+                                                 text-foreground text-sm resize-none
+                                                 focus:outline-none focus:border-foreground/30"
                                     />
                                     <div className="flex justify-end gap-2">
                                         <button
-                                            onClick={() => {
-                                                setEditingId(null);
-                                                setEditContent("");
-                                            }}
-                                            className="px-4 py-1.5 rounded-lg text-sm font-medium
-                                                     text-foreground hover:bg-muted transition-colors"
+                                            onClick={() => { setEditingId(null); setEditContent(""); }}
+                                            className="px-3 py-1 rounded-lg text-sm text-muted-foreground
+                                                     hover:bg-secondary transition-colors"
                                         >
                                             Cancel
                                         </button>
                                         <button
                                             onClick={() => handleEdit(comment.id)}
-                                            className="px-4 py-1.5 rounded-lg text-sm font-medium
+                                            className="px-3 py-1 rounded-lg text-sm font-medium
                                                      bg-primary text-primary-foreground
                                                      hover:bg-primary/90 transition-colors"
                                         >
@@ -202,7 +182,7 @@ export function CommentSection({
                                     </div>
                                 </div>
                             ) : (
-                                <p className="text-foreground whitespace-pre-wrap">
+                                <p className="text-sm text-foreground/90 whitespace-pre-wrap pl-8">
                                     {comment.content}
                                 </p>
                             )}
