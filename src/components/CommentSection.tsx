@@ -80,9 +80,9 @@ export function CommentSection({
     return (
         <div className="mt-12 space-y-6">
             {/* Header */}
-            <div className="flex items-center gap-2 pb-4 border-b border-border/20">
+            <div className="flex items-center gap-2 pb-4 border-b-2 border-border">
                 <MessageSquare className="h-5 w-5 text-primary" />
-                <h2 className="text-xl font-bold text-foreground">
+                <h2 className="text-xl font-black text-foreground uppercase tracking-tight">
                     Comments ({comments.length})
                 </h2>
             </div>
@@ -94,9 +94,9 @@ export function CommentSection({
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder={user ? "Write a comment..." : "Please login to comment"}
                     disabled={!user || isSubmitting}
-                    className="w-full min-h-[100px] p-4 rounded-lg bg-card border border-border/20
-                             text-foreground placeholder:text-muted-foreground
-                             focus:outline-none focus:ring-2 focus:ring-primary/50
+                    className="w-full min-h-[100px] p-4 rounded-md bg-muted/30 border-2 border-border
+                             text-foreground placeholder:text-muted-foreground font-medium
+                             focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
                              disabled:opacity-50 disabled:cursor-not-allowed
                              resize-none"
                 />
@@ -104,9 +104,11 @@ export function CommentSection({
                     <button
                         type="submit"
                         disabled={!user || !newComment.trim() || isSubmitting}
-                        className="px-6 py-2 rounded-lg bg-primary text-primary-foreground
-                                 font-medium transition-all duration-200
-                                 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-6 py-2 rounded-md bg-primary text-primary-foreground
+                                 font-bold uppercase tracking-wide text-sm border-2 border-primary/60
+                                 shadow-[2px_2px_0px_0px] shadow-primary/30
+                                 hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isSubmitting ? "Posting..." : "Post Comment"}
                     </button>
@@ -123,7 +125,7 @@ export function CommentSection({
                     comments.map((comment) => (
                         <div
                             key={comment.id}
-                            className="p-4 rounded-lg bg-card border border-border/10"
+                            className="p-4 rounded-md bg-card border-2 border-border"
                         >
                             {/* Comment Header */}
                             <div className="flex items-center justify-between mb-2">

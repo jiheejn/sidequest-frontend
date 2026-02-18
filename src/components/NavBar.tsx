@@ -20,22 +20,22 @@ export function NavBar() {
     };
 
     return (
-        <nav className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <nav className="sticky top-0 z-50 w-full border-b-2 border-border bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <Link
                         href="/"
-                        className="font-logo text-3xl tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
+                        className="font-logo text-3xl tracking-tighter text-primary hover:text-secondary transition-colors"
                     >
                         Giggles
                     </Link>
 
                     {/* Right - Navigation */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                         {/* Find Project Link */}
                         <Link
                             href="/posts"
-                            className="px-4 py-2 text-sm font-medium text-foreground
+                            className="px-4 py-2 text-sm font-bold uppercase tracking-wide text-foreground
                                      hover:text-primary transition-colors"
                         >
                             Find Project
@@ -44,9 +44,10 @@ export function NavBar() {
                         {/* New Project Button */}
                         <button
                             onClick={handleNewPost}
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg
-                                     bg-transparent border border-foreground/50 text-foreground text-sm font-medium
-                                     hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-200"
+                            className="flex items-center gap-2 px-3 py-2 rounded-md
+                                     bg-transparent border-2 border-primary text-primary text-sm font-bold uppercase tracking-wide
+                                     shadow-[2px_2px_0px_0px] shadow-primary/30
+                                     hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
                         >
                             <Plus className="h-4 w-4" />
                             <span className="hidden sm:inline">New Project</span>
@@ -59,17 +60,18 @@ export function NavBar() {
                             <div className="flex items-center gap-2">
                                 <Link
                                     href="/login"
-                                    className="px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background /* 흰색 배경, 검은 글씨 */
-                                             hover:bg-foreground/80 transition-colors"
+                                    className="px-4 py-2 rounded-md text-sm font-bold uppercase tracking-wide
+                                             border-2 border-border text-foreground
+                                             hover:border-primary hover:text-primary transition-all"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-primary text-primary-foreground /* 보라색 배경, 흰 글씨 */
-                                             hover:bg-primary/80 transition-colors"
+                                    className="px-4 py-2 rounded-md text-sm font-bold uppercase tracking-wide
+                                             bg-primary text-primary-foreground border-2 border-primary/60
+                                             shadow-[2px_2px_0px_0px] shadow-primary/30
+                                             hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
                                 >
                                     Sign Up
                                 </Link>

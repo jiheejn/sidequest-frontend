@@ -66,8 +66,8 @@ export default function EditProfilePage() {
                 </button>
 
                 {/* Form Card */}
-                <div className="bg-card rounded-lg border border-border/10 shadow-lg p-8">
-                    <h1 className="text-2xl font-bold text-foreground mb-6">Edit Profile</h1>
+                <div className="bg-card rounded-md border-2 border-border shadow-[4px_4px_0px_0px] shadow-border/20 p-8">
+                    <h1 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tight">Edit Profile</h1>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Avatar Preview */}
@@ -98,7 +98,7 @@ export default function EditProfilePage() {
 
                         {/* Image URL Input */}
                         <div>
-                            <label className="block text-sm font-medium text-foreground mb-2">
+                            <label className="block text-sm font-bold text-foreground mb-2 uppercase tracking-wide">
                                 Profile Image URL
                             </label>
                             <input
@@ -106,9 +106,9 @@ export default function EditProfilePage() {
                                 value={imageUrl}
                                 onChange={(e) => setImageUrl(e.target.value)}
                                 placeholder="https://example.com/avatar.jpg"
-                                className="w-full px-4 py-2 rounded-lg bg-background border border-border/20
-                                         text-foreground placeholder:text-muted-foreground
-                                         focus:outline-none focus:ring-2 focus:ring-primary/50"
+                                className="w-full px-4 py-2 rounded-md bg-muted/30 border-2 border-border
+                                         text-foreground placeholder:text-muted-foreground font-medium
+                                         focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                             />
                             <p className="text-xs text-muted-foreground mt-1">
                                 Enter a URL to your profile image
@@ -117,7 +117,7 @@ export default function EditProfilePage() {
 
                         {/* Nickname Input */}
                         <div>
-                            <label className="block text-sm font-medium text-foreground mb-2">
+                            <label className="block text-sm font-bold text-foreground mb-2 uppercase tracking-wide">
                                 Nickname *
                             </label>
                             <input
@@ -126,22 +126,22 @@ export default function EditProfilePage() {
                                 onChange={(e) => setNickname(e.target.value)}
                                 placeholder="Enter your nickname"
                                 required
-                                className="w-full px-4 py-2 rounded-lg bg-background border border-border/20
-                                         text-foreground placeholder:text-muted-foreground
-                                         focus:outline-none focus:ring-2 focus:ring-primary/50"
+                                className="w-full px-4 py-2 rounded-md bg-muted/30 border-2 border-border
+                                         text-foreground placeholder:text-muted-foreground font-medium
+                                         focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                             />
                         </div>
 
                         {/* Email (Read-only) */}
                         <div>
-                            <label className="block text-sm font-medium text-foreground mb-2">
+                            <label className="block text-sm font-bold text-foreground mb-2 uppercase tracking-wide">
                                 Email
                             </label>
                             <input
                                 type="email"
                                 value={user.email}
                                 disabled
-                                className="w-full px-4 py-2 rounded-lg bg-muted border border-border/20
+                                className="w-full px-4 py-2 rounded-md bg-muted border-2 border-border
                                          text-muted-foreground cursor-not-allowed"
                             />
                             <p className="text-xs text-muted-foreground mt-1">
@@ -161,18 +161,20 @@ export default function EditProfilePage() {
                             <button
                                 type="button"
                                 onClick={() => router.back()}
-                                className="flex-1 px-6 py-2 rounded-lg border border-border/20
-                                         text-foreground font-medium
-                                         hover:bg-accent/20 transition-colors"
+                                className="flex-1 px-6 py-2 rounded-md border-2 border-border
+                                         text-foreground font-bold uppercase tracking-wide text-sm
+                                         hover:border-primary hover:text-primary transition-all duration-150"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-1 px-6 py-2 rounded-lg bg-primary text-primary-foreground
-                                         font-medium hover:bg-primary/90 transition-colors
-                                         disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-6 py-2 rounded-md bg-primary text-primary-foreground
+                                         font-bold uppercase tracking-wide text-sm border-2 border-primary/60
+                                         shadow-[2px_2px_0px_0px] shadow-primary/30
+                                         hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
+                                         transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? "Saving..." : "Save Changes"}
                             </button>

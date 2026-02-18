@@ -62,20 +62,20 @@ export function PostListItem({ post }: PostListItemProps) {
     return (
         <Link href={`/posts/${post.id}`} className="block group">
             <div className="
-                relative p-6 bg-card rounded-lg
-                border border-border/20
-                transition-all duration-300 ease-in-out
-                /* 배경색 변화와 그림자 제거, 테두리 색상만 변경 */
-                hover:border-border
+                relative p-6 bg-card rounded-md
+                border-2 border-border
+                shadow-[3px_3px_0px_0px] shadow-border/20
+                transition-all duration-150 ease-in-out
+                hover:shadow-[1px_1px_0px_0px] hover:shadow-border/20 hover:translate-x-[2px] hover:translate-y-[2px]
             ">
                 {/* 북마크 버튼 */}
                 <button
                     onClick={handleBookmarkClick}
                     disabled={isBookmarking}
                     className="
-                        absolute top-4 right-4 p-2 rounded-full
-                        transition-all duration-200
-                        hover:bg-accent/20
+                        absolute top-4 right-4 p-2 rounded-md
+                        transition-all duration-150
+                        hover:bg-primary/10
                         disabled:opacity-50 disabled:cursor-not-allowed
                         z-10
                     "
@@ -94,15 +94,15 @@ export function PostListItem({ post }: PostListItemProps) {
                 <div className="mb-4 flex flex-wrap items-center gap-2 pr-12">
                     <RecruitStatusBadge status={post.recruitStatus || 'OPEN'} />
                     <span className="
-                        inline-block px-3 py-1 rounded-full text-xs font-semibold
-                        bg-secondary text-secondary-foreground
+                        inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wide
+                        bg-secondary/20 text-secondary border border-secondary/40
                     ">
                         {post.position.name}
                     </span>
                     {post.tags?.slice(0, 4).map(tag => (
                         <span key={tag.id} className="
-                            inline-block px-3 py-1 rounded-full text-xs font-medium
-                            bg-muted text-muted-foreground
+                            inline-block px-3 py-1 rounded-md text-xs font-medium
+                            bg-muted text-muted-foreground border border-border
                         ">
                             {tag.name}
                         </span>

@@ -99,26 +99,26 @@ export default function PostDetailPage({
                 </button>
 
                 {/* Main Content Card */}
-                <article className="bg-card rounded-lg border border-border/10 shadow-lg overflow-hidden">
+                <article className="bg-card rounded-md border-2 border-border shadow-[4px_4px_0px_0px] shadow-border/20 overflow-hidden">
                     {/* Header Section */}
-                    <div className="p-6 sm:p-8 border-b border-border/10">
+                    <div className="p-6 sm:p-8 border-b-2 border-border">
                         {/* Status, Position, Tags */}
                         <div className="flex flex-wrap items-center gap-2 mb-4">
                             <RecruitStatusBadge status={post.recruitStatus} />
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold
-                                           bg-secondary text-secondary-foreground">
+                            <span className="px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wide
+                                           bg-secondary/20 text-secondary border border-secondary/40">
                                 {post.position.name}
                             </span>
                             {post.tags.map(tag => (
-                                <span key={tag.id} className="px-3 py-1 rounded-full text-xs font-medium
-                                                              bg-muted text-muted-foreground">
+                                <span key={tag.id} className="px-3 py-1 rounded-md text-xs font-medium
+                                                              bg-muted text-muted-foreground border border-border">
                                     {tag.name}
                                 </span>
                             ))}
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
+                        <h1 className="text-3xl sm:text-4xl font-black text-foreground mb-6 tracking-tight">
                             {post.title}
                         </h1>
 
@@ -168,13 +168,13 @@ export default function PostDetailPage({
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex items-center gap-2 mt-6 pt-6 border-t border-border/10">
+                        <div className="flex items-center gap-2 mt-6 pt-6 border-t-2 border-border">
                             {/* Bookmark */}
                             <button
                                 onClick={handleBookmark}
-                                className="flex items-center gap-2 px-4 py-2 rounded-lg
-                                         transition-all duration-200
-                                         hover:bg-accent/20 outline-none"
+                                className="flex items-center gap-2 px-4 py-2 rounded-md
+                                         transition-all duration-150
+                                         hover:bg-primary/10 outline-none"
                             >
                                 <Bookmark
                                     className={`h-5 w-5 ${
@@ -193,8 +193,8 @@ export default function PostDetailPage({
                                 <>
                                     <button
                                         onClick={() => router.push(`/posts/${postId}/edit`)}
-                                        className="flex items-center gap-2 px-4 py-2 rounded-lg
-                                                 text-foreground hover:bg-accent/20 transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-md
+                                                 text-foreground hover:bg-primary/10 transition-colors"
                                     >
                                         <Edit className="h-4 w-4" />
                                         <span className="text-sm font-medium">Edit</span>
@@ -224,7 +224,7 @@ export default function PostDetailPage({
                     </div>
 
                     {/* Comments Section */}
-                    <div className="p-6 sm:p-8 border-t border-border/10">
+                    <div className="p-6 sm:p-8 border-t-2 border-border">
                         <CommentSection
                             comments={post.comments}
                             postId={postId}

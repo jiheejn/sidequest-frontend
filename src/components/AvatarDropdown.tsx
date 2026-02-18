@@ -42,8 +42,8 @@ export function AvatarDropdown() {
             {/* Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg
-                         hover:bg-accent/20 transition-colors outline-none"
+                className="flex items-center gap-2 px-3 py-2 rounded-md
+                         hover:bg-primary/10 transition-colors outline-none"
             >
                 {/* Avatar */}
                 <div className="h-8 w-8 rounded-full overflow-hidden bg-primary/20
@@ -71,23 +71,23 @@ export function AvatarDropdown() {
 
             {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-lg bg-card border border-border/20
-                              shadow-lg overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-48 rounded-md bg-card border-2 border-border
+                              shadow-[3px_3px_0px_0px] shadow-border/20 overflow-hidden z-50">
                     <button
                         onClick={() => {
                             setIsOpen(false);
                             router.push("/profile");
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground
-                                 hover:bg-accent/20 transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-foreground
+                                 hover:bg-primary/10 transition-colors"
                     >
                         <User className="h-4 w-4" />
                         <span>Profile</span>
                     </button>
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-destructive
-                                 hover:bg-destructive/10 transition-colors border-t border-border/10"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-destructive
+                                 hover:bg-destructive/10 transition-colors border-t-2 border-border"
                     >
                         <LogOut className="h-4 w-4" />
                         <span>Logout</span>

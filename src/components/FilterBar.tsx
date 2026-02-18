@@ -38,19 +38,19 @@ export function FilterBar({
     const [isOpen, setIsOpen] = useState(false);
 
     // 라벨 공통 스타일
-    const labelStyle = "w-32 pt-1.5 flex-shrink-0 text-sm font-bold text-foreground/70 uppercase tracking-wider";
+    const labelStyle = "w-32 pt-1.5 flex-shrink-0 text-xs font-bold text-primary uppercase tracking-widest";
 
     return (
         <Collapsible
             open={isOpen}
             onOpenChange={setIsOpen}
-            className="w-full border border-border/20 rounded-lg overflow-hidden bg-background"
+            className="w-full border-2 border-border rounded-md overflow-hidden bg-card shadow-[3px_3px_0px_0px] shadow-border/15"
         >
             {/* 상단 컨트롤 바: 항상 노출됨 */}
-            <div className="flex items-center justify-between px-6 py-4 bg-background">
+            <div className="flex items-center justify-between px-6 py-4 bg-card">
                 <div className="flex items-center gap-4">
                     <CollapsibleTrigger asChild>
-                        <button className="flex items-center gap-2 text-sm font-semibold hover:text-primary transition-colors group">
+                        <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide hover:text-primary transition-colors group">
                             <SlidersHorizontal className="h-4 w-4" />
                             <span>Filters</span>
                             <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />

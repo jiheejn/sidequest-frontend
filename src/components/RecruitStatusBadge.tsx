@@ -6,10 +6,10 @@ interface RecruitStatusBadgeProps {
 export function RecruitStatusBadge({ status }: RecruitStatusBadgeProps) {
     return (
         <span className={`
-            inline-block px-3 py-1 rounded-full text-xs font-semibold
+            inline-block px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wide border-2
             ${status === 'OPEN'
-            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-            : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+            ? 'bg-primary/15 text-primary border-primary/40'
+            : 'bg-muted text-muted-foreground border-border'
         }
         `}>
             {status}

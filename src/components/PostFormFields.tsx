@@ -50,7 +50,7 @@ export function PostFormFields({
 
             {/* Position Selection */}
             <div className="space-y-3">
-                <label className="text-sm font-semibold text-text/90 block">
+                <label className="text-xs font-bold text-primary uppercase tracking-widest block">
                     Position You're Looking For *
                 </label>
                 <div className="flex w-full items-center gap-2 flex-wrap">
@@ -69,7 +69,7 @@ export function PostFormFields({
 
             {/* Tags Selection */}
             <div className="space-y-3">
-                <label className="text-sm font-semibold text-text/90 block">
+                <label className="text-xs font-bold text-primary uppercase tracking-widest block">
                     Required Stacks / Skills
                 </label>
                 <div className="flex w-full items-center gap-2 flex-wrap">
@@ -88,7 +88,7 @@ export function PostFormFields({
 
             {/* Recruit Status */}
             <div className="space-y-2">
-                <label className="text-sm font-semibold text-text/90 block">
+                <label className="text-xs font-bold text-primary uppercase tracking-widest block">
                     Recruitment Status
                 </label>
                 <div className="flex gap-4">

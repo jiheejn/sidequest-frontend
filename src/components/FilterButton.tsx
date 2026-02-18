@@ -14,14 +14,12 @@ export function FilterButton({ onClick, isActive, children }: FilterButtonProps)
             type="button"
             onClick={onClick}
             className={`
-                shrink-0 rounded-full px-4 py-1 text-sm font-medium transition-all duration-200
-                border
+                shrink-0 rounded-md px-4 py-1.5 text-xs font-bold uppercase tracking-wide transition-all duration-150
+                border-2
                 ${
                 isActive
-                    ? // 활성 상태: 텍스트와 배경 반전, 테두리도 명확하게
-                    "bg-foreground text-background border-foreground"
-                    : // 비활성 상태: 아주 연한 테두리, 호버 시 진해짐
-                    "bg-white/60 border-border/20 text-muted-foreground hover:border-border hover:text-foreground"
+                    ? "bg-primary text-primary-foreground border-primary/60 shadow-[2px_2px_0px_0px] shadow-primary/25"
+                    : "bg-muted/40 border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
             }
             `}
         >
