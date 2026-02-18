@@ -1,3 +1,4 @@
+// components/RecruitStatusBadge.tsx
 interface RecruitStatusBadgeProps {
     status: 'OPEN' | 'CLOSED';
 }
@@ -5,16 +6,13 @@ interface RecruitStatusBadgeProps {
 export function RecruitStatusBadge({ status }: RecruitStatusBadgeProps) {
     return (
         <span className={`
-            inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium
+            inline-block px-3 py-1 rounded-full text-xs font-semibold
             ${status === 'OPEN'
-            ? 'bg-accent/10 text-accent-foreground'
-            : 'bg-secondary text-muted-foreground'
+            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+            : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
         }
         `}>
-            <span className={`h-1.5 w-1.5 rounded-full ${
-                status === 'OPEN' ? 'bg-accent' : 'bg-muted-foreground/50'
-            }`} />
-            {status === 'OPEN' ? 'Open' : 'Closed'}
+            {status}
         </span>
     );
 }

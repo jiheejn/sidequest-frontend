@@ -23,11 +23,11 @@ function TeamBuildContent() {
     const isLoading = isFilterLoading || isPostsLoading;
 
     return (
-        <div className="container mx-auto max-w-5xl py-8">
-            <h1 className="font-semibold text-3xl mt-6 mb-1 tracking-tight text-foreground">Find your team</h1>
-            <p className="text-muted-foreground mb-10 text-sm">Discover projects and connect with creators.</p>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h1 className="text-3xl font-bold mb-2 text-foreground">Find your team.</h1>
+            <p className="text-muted-foreground mb-8">Discover projects and connect with creators.</p>
 
-            <div className="mb-8">
+            <div className="mb-6">
                 {isFilterLoading ? (
                     <Skeleton className="h-32 w-full rounded-lg" />
                 ) : (
@@ -46,15 +46,15 @@ function TeamBuildContent() {
             </div>
 
             {!isLoading && error && (
-                <div className="text-center py-10 text-destructive border border-dashed rounded-lg mb-4">
-                    <p>Unable to load data. Please check if the backend server is running.</p>
+                <div className="text-center py-10 text-destructive">
+                    Unable to load data. Please check if the backend server is running.
                 </div>
             )}
 
             {isLoading ? (
                 <div className="space-y-4">
                     {Array.from({ length: 5 }).map((_, i) => (
-                        <Skeleton key={i} className="h-24 w-full rounded-lg" />
+                        <Skeleton key={i} className="h-32 w-full rounded-lg" />
                     ))}
                 </div>
             ) : (
@@ -65,9 +65,9 @@ function TeamBuildContent() {
                                 <PostListItem key={post.id} post={post} />
                             ))
                         ) : (
-                            <div className="text-center py-16">
+                            <div className="text-center py-20">
                                 <p className="text-muted-foreground">No projects found matching your filters.</p>
-                                <p className="text-sm text-muted-foreground/80 mt-2">Try adjusting or clearing your filters.</p>
+                                <p className="text-sm text-muted-foreground mt-1">Try adjusting or clearing your filters.</p>
                             </div>
                         )}
                     </div>
@@ -75,7 +75,7 @@ function TeamBuildContent() {
                     {postData && postData.totalPages > 1 && (
                         <Pagination
                             totalPages={postData.totalPages}
-                            className="mt-12"
+                            className="mt-10"
                         />
                     )}
                 </>
@@ -88,11 +88,11 @@ function TeamBuildContent() {
 export default function TeamBuildPage() {
     return (
         <Suspense fallback={
-            <div className="container mx-auto max-w-5xl py-8">
-                <Skeleton className="h-12 w-48 mb-4" />
-                <Skeleton className="h-32 w-full rounded-lg mb-8" />
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <Skeleton className="h-10 w-64 mb-4" />
+                <Skeleton className="h-32 w-full rounded-lg mb-6" />
                 <div className="space-y-4">
-                    {[1, 2, 3].map((i) => <Skeleton key={i} className="h-24 w-full rounded-lg" />)}
+                    {[1, 2, 3].map((i) => <Skeleton key={i} className="h-32 w-full rounded-lg" />)}
                 </div>
             </div>
         }>

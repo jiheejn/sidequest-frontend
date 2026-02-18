@@ -1,3 +1,4 @@
+// components/AvatarDropdown.tsx
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -12,6 +13,7 @@ export function AvatarDropdown() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // 외부 클릭 감지
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -37,54 +39,51 @@ export function AvatarDropdown() {
 
     return (
         <div className="relative" ref={dropdownRef}>
+            {/* Trigger Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-lg
-                         hover:bg-secondary transition-colors outline-none"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg
+                         hover:bg-accent/20 transition-colors outline-none"
             >
-                <div className="h-7 w-7 rounded-full overflow-hidden bg-secondary
-                              flex items-center justify-center">
+                {/* Avatar */}
+                <div className="w-8 h-8 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
                     {user.image ? (
-                        <img
-                            src={user.image}
-                            alt={user.nickname}
-                            className="h-full w-full object-cover"
-                        />
+                        <img src={user.image} alt={user.nickname} className="w-full h-full object-cover" />
                     ) : (
-                        <span className="text-xs font-medium text-foreground">
+                        <span className="text-sm font-bold text-secondary-foreground">
                             {user.nickname[0].toUpperCase()}
                         </span>
                     )}
                 </div>
-                <span className="text-sm text-foreground hidden sm:block">
+                {/* Name */}
+                <span className="text-sm font-medium text-foreground hidden sm:block">
                     {user.nickname}
                 </span>
-                <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform
-                    ${isOpen ? "rotate-180" : ""}`} />
+                {/* Arrow */}
+                <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
+            {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 mt-1 w-44 rounded-xl bg-card border border-border
-                              shadow-lg overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-48 rounded-xl bg-card border border-border/50 shadow-lg py-1 z-50">
                     <button
                         onClick={() => {
                             setIsOpen(false);
                             router.push("/profile");
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground
-                                 hover:bg-secondary transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground
+                                 hover:bg-accent/20 transition-colors"
                     >
                         <User className="h-4 w-4 text-muted-foreground" />
-                        <span>Profile</span>
+                        Profile
                     </button>
-                    <div className="h-px bg-border" />
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-destructive
-                                 hover:bg-secondary transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-destructive
+                                 hover:bg-accent/20 transition-colors"
                     >
                         <LogOut className="h-4 w-4" />
-                        <span>Logout</span>
+                        Logout
                     </button>
                 </div>
             )}

@@ -1,16 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 /* @custom-variant는 @tailwindcss/theming 플러그인의 일부일 수 있습니다.
-  정상 작동했다면 그대로 둡니다.
+   정상 작동했다면 그대로 둡니다.
 */
 @custom-variant dark (&:is(.dark *));
 
 /* [중요] 테마 플러그인을 위한 '지도'입니다.
-  여기서 chart-*, sidebar-* 변수들을 삭제했습니다.
+   여기서 chart-*, sidebar-* 변수들을 삭제했습니다.
 */
 @theme inline {
     --font-sans: var(--font-sans);
     --font-logo: var(--font-logo);
+    --font-accent: var(--font-accent);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -32,63 +33,87 @@
     --color-card: var(--card);
 }
 
-/* Render-inspired: clean, minimal, Swiss flat design */
+@theme {
+    --backgroundImage: {
+'grid-pattern': "url('/images/wave-grid-pattern.svg')",
+'purple-gradient': 'radial-gradient(circle at bottom, rgba(157, 0, 255, 0.3) 0%, rgba(0,0,0,0) 60%)'
+}
+}
+/* 라이트 모드 테마 (기본, DesignWave 스타일 아님) */
 :root {
-    --background: oklch(0.9874 0.019 93.66);
-    --foreground: oklch(0.20 0.01 0);
+    /* 기본 배경 및 텍스트 (요청하신 #f9f3db 기반) */
+    --background: oklch(0.96 0.02 90);      /* #f9f3db (따뜻한 버터 베이지) */
+    --foreground: oklch(0.12 0 0);          /* #1a1a1a (완전 검정보다 깊이 있는 먹색) */
 
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.20 0.01 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.20 0.01 0);
+    /* 카드 및 팝업 (흰색에 가까운 베이지로 대비감 부여) */
+    --card: oklch(0.98 0.01 90);
+    --card-foreground: oklch(0.12 0 0);
+    --popover: oklch(0.98 0.01 90);
+    --popover-foreground: oklch(0.12 0 0);
 
-    /* Primary: charcoal black for buttons and key UI */
-    --primary: oklch(0.20 0.01 0);
-    --primary-foreground: oklch(0.98 0.005 93.66);
+    /* 핵심 포인트 (Primary: 강렬한 블랙 & 오프화이트) */
+    --primary: oklch(0.12 0 0);             /* 버튼 등 핵심 요소는 블랙으로 */
+    --primary-foreground: oklch(0.98 0.01 90); /* 블랙 위에는 밝은 베이지 텍스트 */
 
-    /* Secondary: light neutral */
-    --secondary: oklch(0.95 0.005 93.66);
-    --secondary-foreground: oklch(0.25 0.01 0);
+    /* 보조 및 강조 (Secondary: 세련된 뮤트 그레이-베이지) */
+    --secondary: oklch(0.90 0.03 90);       /* 배경보다 한 단계 어두운 베이지 */
+    --secondary-foreground: oklch(0.12 0 0);
+    --muted: oklch(0.92 0.02 90);
+    --muted-foreground: oklch(0.40 0.01 90); /* 차분한 중간 톤 */
+    --accent: oklch(0.20 0 0);              /* 강조 시 더 진한 블랙 */
+    --accent-foreground: oklch(0.98 0.01 90);
 
-    /* Muted */
-    --muted: oklch(0.96 0.005 93.66);
-    --muted-foreground: oklch(0.50 0.01 0);
+    /* 테두리 및 입력창 (요청하신 검정색 계열) */
+    --border: oklch(0.12 0 0);              /* 선명하고 얇은 블랙 라인 */
+    --input: oklch(0.12 0 0);
+    --ring: oklch(0.12 0 0);                /* 포커스 시에도 깔끔한 블랙 */
 
-    /* Accent: green per user spec */
-    --accent: oklch(91.01% 0.179 134.56);
-    --accent-foreground: oklch(0.18 0.02 142);
+    /* 에러/위험 (베이지와 대비되는 차분한 레드) */
+    --destructive: oklch(0.55 0.18 25);
+    --destructive-foreground: oklch(0.98 0.01 90);
 
-    /* Borders: very light, clean */
-    --border: oklch(0.88 0.005 93.66);
-    --input: oklch(0.88 0.005 93.66);
-    --ring: oklch(91.01% 0.179 134.56);
-
-    --destructive: oklch(0.58 0.22 25);
-    --destructive-foreground: oklch(0.98 0.01 0);
-
-    --radius: 0.5rem;
+    --radius: 0.5rem;                       /* 너무 둥글지 않은 세련된 반경 */
 }
 
+/* 다크 모드 ('DesignWave' 테마 적용)
+   - 검정 배경, 보라/핑크 포인트
+*/
 .dark {
-    --background: oklch(0.14 0.005 0);
-    --foreground: oklch(0.92 0.005 93.66);
-    --card: oklch(0.18 0.005 0);
-    --card-foreground: oklch(0.92 0.005 93.66);
-    --popover: oklch(0.18 0.005 0);
-    --popover-foreground: oklch(0.92 0.005 93.66);
-    --primary: oklch(0.95 0.005 93.66);
-    --primary-foreground: oklch(0.14 0.005 0);
-    --secondary: oklch(0.22 0.005 0);
-    --secondary-foreground: oklch(0.85 0.005 93.66);
-    --muted: oklch(0.22 0.005 0);
-    --muted-foreground: oklch(0.55 0.005 0);
-    --accent: oklch(91.01% 0.179 134.56);
-    --accent-foreground: oklch(0.14 0.02 142);
-    --border: oklch(0.28 0.005 0);
-    --input: oklch(0.28 0.005 0);
-    --ring: oklch(91.01% 0.179 134.56);
-    --destructive: oklch(0.58 0.22 25);
-    --radius: 0.5rem;
+    --radius: 0.625rem;
+
+    /* Core Colors */
+    --background: oklch(0 0 0); /* Pure Black */
+    --foreground: oklch(1 0 0); /* Pure White */
+
+    /* Primary Color (Main Purple from DesignWave) */
+    --primary: oklch(0.49 0.32 297); /* #9D00FF */
+    --primary-foreground: oklch(1 0 0); /* White text on primary */
+
+    /* Accent Color (Pink from DesignWave, for "WAVE" logo and highlights) */
+    --accent: oklch(0.64 0.26 320); /* #E040FB */
+    --accent-foreground: oklch(1 0 0); /* White text on accent */
+
+    /* Secondary Color (Subtle dark purple/gray) */
+    --secondary: oklch(0.15 0.05 297);
+    --secondary-foreground: oklch(0.95 0.01 297);
+
+    /* Muted Colors */
+    --muted: oklch(0.1 0.0 0);
+    --muted-foreground: oklch(0.6 0.0 0);
+
+    /* Card / Popover Colors (Slightly off-black for depth) */
+    --card: oklch(0.05 0.0 0);
+    --card-foreground: var(--foreground);
+    --popover: var(--card);
+    --popover-foreground: var(--foreground);
+
+    /* Border / Input / Ring Colors */
+    --border: oklch(1 0 0 / 0.1); /* 10% White for subtle borders */
+    --input: oklch(1 0 0 / 0.1);
+    --ring: var(--primary); /* Primary Purple for focus rings */
+
+    /* Destructive Color (Bright red/pink for errors/warnings) */
+    --destructive: oklch(0.6 0.25 29);
 }
 
 @layer base {

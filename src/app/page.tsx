@@ -1,54 +1,38 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react"; // 상단에 임포트 잊지 마세요!
 
 export default function HomePage() {
     return (
-        <div className="relative h-[calc(100vh-3.5rem)] w-full bg-background overflow-hidden">
+        <div className="relative h-[calc(100vh-4rem)] w-full bg-background overflow-hidden">
             <div className="h-full w-full flex flex-col justify-center px-8 md:px-20 lg:px-40">
-                <div className="flex flex-col md:flex-row items-center md:items-end w-full gap-16">
+                <div className="flex flex-col md:flex-row items-center md:items-end w-full">
 
-                    <div className="w-full md:w-3/5 flex flex-col justify-center text-left">
-                        <div className="inline-flex items-center gap-2 w-fit px-3 py-1 mb-8 text-xs font-medium
-                                       text-accent-foreground bg-accent/15 rounded-full">
-                            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                            Side Projects Hub
-                        </div>
-
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-foreground text-balance">
-                            Build your side projects with the best team
+                    {/* 1. 텍스트 영역 */}
+                    <div className="w-full md:w-1/2 flex flex-col justify-center text-left">
+                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium uppercase tracking-tighter leading-[0.9] text-foreground">
+                            Build Your<br />
+                            Side Projects<br />
+                            With The<br />
+                            Best Team
                         </h1>
-                        <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-lg">
+                        <p className="mt-6 text-base md:text-lg text-foreground/70 font-medium tracking-tighter leading-snug max-w-[85%]">
                             Stop wandering alone in search of inspiration. Join a vibrant community
-                            where passionate developers, designers, and PMs collide to turn ideas into reality.
+                            where passionate developers, creative designers, and strategic PMs
+                            collide to turn raw ideas into reality.
                         </p>
-
-                        <div className="mt-10 flex items-center gap-3">
-                            <a
-                                href="/posts"
-                                className="group inline-flex items-center gap-2 px-6 py-3
-                                         bg-primary text-primary-foreground text-sm font-medium
-                                         rounded-lg hover:bg-primary/90 transition-colors"
-                            >
-                                Start Building
-                                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                            </a>
-                            <a
-                                href="/posts"
-                                className="inline-flex items-center gap-2 px-6 py-3
-                                         text-sm font-medium text-foreground
-                                         rounded-lg border border-border hover:bg-secondary transition-colors"
-                            >
-                                Browse Projects
-                            </a>
-                        </div>
                     </div>
 
-                    {/* Right side: minimal decorative element */}
-                    <div className="hidden md:flex flex-1 items-end justify-center pb-16">
-                        <div className="relative w-64 h-64">
-                            <div className="absolute inset-0 bg-accent/8 rounded-2xl" />
-                            <div className="absolute top-6 left-6 right-6 bottom-6 border border-accent/20 rounded-xl" />
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-24 bg-foreground/80 transition-all" />
-                        </div>
+                    {/* 2. 버튼 영역: 아이콘 추가 및 그룹 호버 효과 */}
+                    <div className="mt-10 md:mt-0 md:ml-10 lg:ml-auto md:mb-12 lg:mb-4 w-full md:w-auto flex justify-start">
+                        <a
+                            href="/posts"
+                            className="group inline-flex items-center gap-2 px-10 py-4 border-2 border-foreground
+                       bg-foreground text-background text-base font-bold uppercase
+                       transition-colors duration-200 hover:bg-transparent hover:text-foreground"
+                        >
+                            Start Building Now
+                            {/* 호버 시 화살표가 오른쪽으로 살짝 움직이는 애니메이션 추가 */}
+                            <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                        </a>
                     </div>
 
                 </div>

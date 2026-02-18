@@ -104,12 +104,10 @@ export default function CreatePostPage() {
                     onPositionSelect={setSelectedPositionId}
                     onTagToggle={handleTagToggle}
                     disabled={isSubmitting}
-                    // 아래는 PostFormFields 내부에서 스타일로 적용해야 함을 알리기 위한 주석입니다.
-                    // titleClassName="text-4xl md:text-5xl font-bold border-none px-0 focus-visible:ring-0 placeholder:text-muted-foreground/30"
                 />
 
                 {/* 하단 버튼 영역 */}
-                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border">
+                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/30">
                     <Button
                         variant="ghost"
                         onClick={() => router.back()}

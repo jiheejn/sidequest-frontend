@@ -37,34 +37,33 @@ export function FilterBar({
                           }: FilterBarProps) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const labelStyle = "w-28 pt-0.5 flex-shrink-0 text-xs font-medium text-muted-foreground";
+    // 라벨 공통 스타일
+    const labelStyle = "w-32 pt-1.5 flex-shrink-0 text-sm font-bold text-foreground/70 uppercase tracking-wider";
 
     return (
-        <Collapsible
-            open={isOpen}
-            onOpenChange={setIsOpen}
-            className="w-full border border-border rounded-xl overflow-hidden bg-card"
-        >
-            <div className="flex items-center justify-between px-5 py-3">
-                <div className="flex items-center gap-4">
+        <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-full">
+            {/* 상단 컨트롤 바: 항상 노출됨 */}
+            <div className="flex items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
                     <CollapsibleTrigger asChild>
-                        <button className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent-foreground transition-colors">
+                        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border/50 text-sm font-medium hover:border-border transition-colors">
                             <SlidersHorizontal className="h-4 w-4" />
                             <span>Filters</span>
-                            <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                            <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
                     </CollapsibleTrigger>
 
+                    {/* 선택된 필터가 있을 때 보여주는 요약 정보 (선택 사항) */}
                     {(selectedPositionId || selectedTagIds.length > 0 || showOpenOnly) && !isOpen && (
                         <div className="flex items-center gap-2">
-                            <span className="h-4 w-px bg-border" />
                             <span className="text-xs text-muted-foreground">
-                                {(showOpenOnly ? 1 : 0) + (selectedPositionId ? 1 : 0) + selectedTagIds.length} active
+                                Active filters: { (showOpenOnly ? 1 : 0) + (selectedPositionId ? 1 : 0) + selectedTagIds.length }
                             </span>
                         </div>
                     )}
                 </div>
 
+                {/* 필터 전체 초기화 버튼 */}
                 {(selectedPositionId || selectedTagIds.length > 0 || showOpenOnly) && (
                     <button
                         onClick={() => {
@@ -72,34 +71,35 @@ export function FilterBar({
                             if (showOpenOnly) onShowOpenOnlyChange(false);
                             onClearStacks();
                         }}
-                        className="text-xs text-muted-foreground hover:text-destructive flex items-center gap-1 transition-colors"
+                        className="text-xs font-medium text-muted-foreground hover:text-destructive flex items-center gap-1"
                     >
                         <X className="h-3 w-3" />
-                        Reset
+                        Reset All
                     </button>
                 )}
             </div>
 
-            <CollapsibleContent className="px-5 pb-5 space-y-4 animate-in fade-in slide-in-from-top-2">
-                <div className="h-px bg-border w-full" />
-
+            {/* 접히는 필터 내용 */}
+            <CollapsibleContent className="space-y-4 p-6 bg-card rounded-lg border border-border/50">
+                {/* 1. Recruit Status */}
                 <div className="flex items-start gap-4">
                     <div className={labelStyle}>Status</div>
-                    <div className="flex flex-wrap items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-2">
                         <FilterButton onClick={() => onShowOpenOnlyChange(false)} isActive={!showOpenOnly}>
-                            All
+                            All Posts
                         </FilterButton>
                         <FilterButton onClick={() => onShowOpenOnlyChange(true)} isActive={showOpenOnly}>
-                            Open Only
+                            Show Open Only
                         </FilterButton>
                     </div>
                 </div>
 
+                {/* 2. Position */}
                 <div className="flex items-start gap-4">
                     <div className={labelStyle}>Position</div>
-                    <div className="flex flex-wrap items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-2">
                         <FilterButton onClick={() => onPositionChange(null)} isActive={selectedPositionId === null}>
-                            All
+                            All Positions
                         </FilterButton>
                         {allPositions.map(pos => (
                             <FilterButton
@@ -113,9 +113,10 @@ export function FilterBar({
                     </div>
                 </div>
 
+                {/* 3. Stacks */}
                 <div className="flex items-start gap-4">
                     <div className={labelStyle}>Stacks</div>
-                    <div className="flex flex-wrap items-center gap-1.5">
+                    <div className="flex flex-wrap items-center gap-2">
                         {allTags.map(tag => (
                             <FilterButton
                                 key={tag.id}

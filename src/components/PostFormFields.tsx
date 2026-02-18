@@ -1,3 +1,4 @@
+// components/post/PostFormFields.tsx
 "use client"
 
 import { Input } from "@/components/ui/input"
@@ -37,28 +38,28 @@ export function PostFormFields({
                                    disabled = false,
                                }: PostFormFieldsProps) {
     return (
-        <div className="space-y-6">
-            {/* Title */}
+        <div className="space-y-8">
+            {/* Title Input */}
             <Input
                 value={title}
                 onChange={(e) => onTitleChange(e.target.value)}
                 placeholder="Title"
-                className="w-full placeholder:text-muted-foreground/50 text-3xl md:text-5xl lg:text-5xl border-none font-semibold focus-visible:ring-0 px-0 shadow-none"
-                disabled={disabled}
+                className="w-full placeholder:text-muted-foreground/50 text-3xl md:text-5xl lg:text-5xl border-none font-bold focus-visible:ring-0 px-0 shadow-none" disabled={disabled}
                 required
             />
 
-            {/* Position */}
-            <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground block">
-                    Position *
+            {/* Position Selection */}
+            <div className="space-y-3">
+                <label className="text-sm font-semibold text-foreground/80 block">
+                    Position You're Looking For *
                 </label>
-                <div className="flex w-full items-center gap-1.5 flex-wrap">
+                <div className="flex w-full items-center gap-2 flex-wrap">
                     {positions.map((pos) => (
                         <FilterButton
                             key={pos.id}
                             onClick={() => onPositionSelect(pos.id)}
                             isActive={selectedPositionId === pos.id}
+                            //disabled={disabled}
                         >
                             {pos.name}
                         </FilterButton>
@@ -66,17 +67,18 @@ export function PostFormFields({
                 </div>
             </div>
 
-            {/* Tags */}
-            <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground block">
-                    Stacks / Skills
+            {/* Tags Selection */}
+            <div className="space-y-3">
+                <label className="text-sm font-semibold text-foreground/80 block">
+                    Required Stacks / Skills
                 </label>
-                <div className="flex w-full items-center gap-1.5 flex-wrap">
+                <div className="flex w-full items-center gap-2 flex-wrap">
                     {tags.map((tag) => (
                         <FilterButton
                             key={tag.id}
                             onClick={() => onTagToggle(tag.id)}
                             isActive={selectedTags.includes(tag.id)}
+                            //disabled={disabled}
                         >
                             {tag.name}
                         </FilterButton>
@@ -85,20 +87,20 @@ export function PostFormFields({
             </div>
 
             {/* Recruit Status */}
-            <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground block">
-                    Status
+            <div className="space-y-3">
+                <label className="text-sm font-semibold text-foreground/80 block">
+                    Recruitment Status
                 </label>
-                <div className="flex gap-4">
+                <div className="flex gap-6">
                     <label className="flex items-center gap-2 cursor-pointer">
                         <input
                             type="radio" value="OPEN"
                             checked={recruitStatus === "OPEN"}
                             onChange={(e) => onRecruitStatusChange(e.target.value)}
                             disabled={disabled}
-                            className="cursor-pointer accent-accent"
+                            className="cursor-pointer accent-primary"
                         />
-                        <span className="text-sm text-foreground">Open</span>
+                        Open
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -106,9 +108,9 @@ export function PostFormFields({
                             checked={recruitStatus === "CLOSED"}
                             onChange={(e) => onRecruitStatusChange(e.target.value)}
                             disabled={disabled}
-                            className="cursor-pointer accent-accent"
+                            className="cursor-pointer accent-primary"
                         />
-                        <span className="text-sm text-foreground">Closed</span>
+                        Closed
                     </label>
                 </div>
             </div>

@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { use } from "react"
 import { useRouter } from "next/navigation"
-import { useAuthStore } from "@/app/store/authStore"
+import { useAuthStore } from "@/app/store/authStore" // Ensure this path is correct
 import { usePostDetail } from "@/hooks/usePostDetail"
 import { RecruitStatusBadge } from "@/components/RecruitStatusBadge"
 import { CommentSection } from "@/components/CommentSection"
@@ -31,7 +31,11 @@ export default function PostDetailPage({
     const { data: post, isLoading, error, toggleBookmark, refreshPost } = usePostDetail(postId);
 
     const handleBookmark = async () => {
-        if (!user) { router.push("/login"); return; }
+        if (!user) {
+            router.push("/login");
+            return;
+        }
+
         try {
             await toggleBookmark();
         } catch (error) {
@@ -42,6 +46,7 @@ export default function PostDetailPage({
 
     const handleDelete = async () => {
         if (!confirm("Delete this post?")) return;
+
         try {
             await postApi.deletePost(postId);
             router.push("/posts");
@@ -55,8 +60,8 @@ export default function PostDetailPage({
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-2 border-border border-t-foreground mx-auto mb-4" />
-                    <p className="text-sm text-muted-foreground">Loading post...</p>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
+                    Loading post...
                 </div>
             </div>
         );
@@ -66,10 +71,10 @@ export default function PostDetailPage({
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <p className="text-destructive text-sm mb-4">{error || "Post not found"}</p>
+                    <p className="text-destructive mb-4">{error || "Post not found"}</p>
                     <button
                         onClick={() => router.push("/posts")}
-                        className="text-sm text-foreground hover:underline"
+                        className="text-primary hover:underline"
                     >
                         Back to posts
                     </button>
@@ -82,131 +87,133 @@ export default function PostDetailPage({
 
     return (
         <div className="min-h-screen bg-background py-8">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Back */}
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground
                              transition-colors mb-6"
                 >
                     <ArrowLeft className="h-4 w-4" />
-                    <span>Back</span>
+                    Back
                 </button>
 
-                <article className="bg-card rounded-xl border border-border overflow-hidden">
-                    {/* Header */}
+                {/* Main Content Card */}
+                <div className="bg-card rounded-xl border border-border/50 overflow-hidden">
+                    {/* Header Section */}
                     <div className="p-6 sm:p-8">
-                        {/* Tags */}
-                        <div className="flex flex-wrap items-center gap-1.5 mb-4">
+                        {/* Status, Position, Tags */}
+                        <div className="flex flex-wrap items-center gap-2 mb-4">
                             <RecruitStatusBadge status={post.recruitStatus} />
-                            <span className="px-2 py-0.5 rounded-md text-xs font-medium
-                                           bg-accent/10 text-accent-foreground">
+                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold
+                                           bg-secondary text-secondary-foreground">
                                 {post.position.name}
                             </span>
                             {post.tags.map(tag => (
-                                <span key={tag.id} className="px-2 py-0.5 rounded-md text-xs
-                                                              text-muted-foreground bg-secondary">
+                                <span key={tag.id} className="inline-block px-3 py-1 rounded-full text-xs font-medium
+                                                             bg-muted text-muted-foreground">
                                     {tag.name}
                                 </span>
                             ))}
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-2xl sm:text-3xl font-semibold text-foreground mb-6 tracking-tight leading-snug">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 leading-tight">
                             {post.title}
                         </h1>
 
-                        {/* Author & Meta */}
+                        {/* Author & Meta Info */}
                         <div className="flex items-center justify-between flex-wrap gap-4">
                             <div className="flex items-center gap-3">
-                                <div className="h-8 w-8 rounded-full overflow-hidden bg-secondary
-                                              flex items-center justify-center">
+                                {/* Avatar */}
+                                <div className="w-10 h-10 rounded-full overflow-hidden bg-secondary flex items-center justify-center">
                                     {post.author.image ? (
                                         <img src={post.author.image} alt={post.author.nickname}
-                                             className="h-full w-full object-cover" />
+                                             className="w-full h-full object-cover" />
                                     ) : (
-                                        <span className="text-xs font-medium text-foreground">
+                                        <span className="text-sm font-bold text-secondary-foreground">
                                             {post.author.nickname[0].toUpperCase()}
                                         </span>
                                     )}
                                 </div>
+                                {/* Author Info */}
                                 <div>
-                                    <p className="text-sm font-medium text-foreground">{post.author.nickname}</p>
+                                    <p className="font-medium text-foreground">
+                                        {post.author.nickname}
+                                    </p>
                                     <p className="text-xs text-muted-foreground">
-                                        {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true, locale: enUS })}
+                                        {formatDistanceToNow(new Date(post.createdAt), {
+                                            addSuffix: true,
+                                            locale: enUS,
+                                        })}
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                            {/* Meta Stats */}
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
                                 <span className="flex items-center gap-1">
-                                    <Eye className="h-3.5 w-3.5" /> {post.viewCount}
+                                    <Eye className="h-4 w-4" /> {post.viewCount}
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    <MessageSquare className="h-3.5 w-3.5" /> {post.commentCount}
+                                    <MessageSquare className="h-4 w-4" /> {post.commentCount}
                                 </span>
                             </div>
                         </div>
 
-                        {/* Actions */}
-                        <div className="flex items-center gap-1 mt-6 pt-5 border-t border-border">
+                        {/* Action Buttons */}
+                        <div className="flex items-center gap-3 mt-6 pt-6 border-t border-border/30">
+                            {/* Bookmark */}
                             <button
                                 onClick={handleBookmark}
-                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm
-                                         hover:bg-secondary transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg
+                                         text-foreground hover:bg-accent/20 transition-colors"
                             >
-                                <Bookmark className={`h-4 w-4 ${
-                                    post.isBookmarked ? "fill-accent text-accent" : "text-muted-foreground"
-                                }`} />
-                                <span className="text-muted-foreground">
-                                    {post.isBookmarked ? "Saved" : "Save"}
+                                <Bookmark className={`h-4 w-4 ${post.isBookmarked ? 'fill-primary text-primary' : ''}`} />
+                                <span className="text-sm">
+                                    {post.isBookmarked ? "Bookmarked" : "Bookmark"}
                                 </span>
                             </button>
 
+                            {/* Edit & Delete (Only for author) */}
                             {isAuthor && (
                                 <>
                                     <button
                                         onClick={() => router.push(`/posts/${postId}/edit`)}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm
-                                                 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg
+                                                 text-foreground hover:bg-accent/20 transition-colors"
                                     >
                                         <Edit className="h-4 w-4" />
-                                        <span>Edit</span>
+                                        <span className="text-sm">Edit</span>
                                     </button>
                                     <button
                                         onClick={handleDelete}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm
-                                                 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg
+                                                 text-destructive hover:bg-destructive/10 transition-colors"
                                     >
                                         <Trash2 className="h-4 w-4" />
-                                        <span>Delete</span>
+                                        <span className="text-sm">Delete</span>
                                     </button>
                                 </>
                             )}
                         </div>
                     </div>
 
-                    {/* Content */}
+                    {/* Content Section */}
                     <div className="px-6 sm:px-8 pb-8">
-                        <div className="h-px bg-border mb-6" />
-                        <div
-                            className="prose prose-neutral dark:prose-invert max-w-none text-sm leading-relaxed
-                                     prose-headings:text-foreground prose-headings:font-semibold
-                                     prose-p:text-foreground/85
-                                     prose-a:text-accent-foreground prose-a:no-underline hover:prose-a:underline"
-                            dangerouslySetInnerHTML={{ __html: post.content }}
-                        />
+                        <div className="prose prose-neutral dark:prose-invert max-w-none"
+                             dangerouslySetInnerHTML={{ __html: post.content }} />
                     </div>
 
-                    {/* Comments */}
-                    <div className="px-6 sm:px-8 pb-8 pt-6 border-t border-border">
+                    {/* Comments Section */}
+                    <div className="px-6 sm:px-8 pb-8 pt-6 border-t border-border/30">
                         <CommentSection
                             comments={post.comments}
                             postId={postId}
                             onCommentChanged={refreshPost}
                         />
                     </div>
-                </article>
+                </div>
             </div>
         </div>
     );
