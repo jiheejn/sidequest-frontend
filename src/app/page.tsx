@@ -25,13 +25,22 @@ export default function HomePage() {
                     <div className="mt-10 md:mt-0 md:ml-10 lg:ml-auto md:mb-12 lg:mb-4 w-full md:w-auto flex justify-start">
                         <a
                             href="/posts"
-                            className="group inline-flex items-center gap-2 px-10 py-4 border-2 border-foreground
-                       bg-foreground text-background text-base font-bold uppercase
-                       transition-colors duration-200 hover:bg-transparent hover:text-foreground"
+                            className="group relative inline-flex items-center gap-2 px-10 py-4 border-2 border-foreground
+                       bg-transparent text-foreground text-base font-bold uppercase
+                       overflow-hidden"
                         >
-                            Start Building Now
-                            {/* 호버 시 화살표가 오른쪽으로 살짝 움직이는 애니메이션 추가 */}
-                            <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                            {/* Highlighter fill background - slides in from left on hover */}
+                            <span
+                                className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                                aria-hidden="true"
+                            />
+                            {/* Button text with underline effect */}
+                            <span className="relative z-10">
+                                <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_3px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_3px] pb-0.5">
+                                    Start Building Now
+                                </span>
+                            </span>
+                            <ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
                         </a>
                     </div>
 
