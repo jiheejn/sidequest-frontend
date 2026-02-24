@@ -2,9 +2,9 @@ import { ArrowRight } from "lucide-react"; // 상단에 임포트 잊지 마세�
 
 export default function HomePage() {
     return (
-        <div className="relative h-[calc(100vh-4rem)] w-full bg-background overflow-hidden">
-            <div className="h-full w-full flex flex-col justify-center px-8 md:px-20 lg:px-40">
-                <div className="flex flex-col md:flex-row items-center md:items-end w-full">
+        <div className="relative h-[calc(100vh-4rem)] w-full max-w-full bg-background overflow-hidden">
+            <div className="h-full w-full flex flex-col justify-center px-4 sm:px-8 md:px-20 lg:px-40">
+                <div className="flex flex-col md:flex-row items-center md:items-end w-full max-w-full">
 
                     {/* 1. 텍스트 영역 */}
                     <div className="w-full md:w-1/2 flex flex-col justify-center text-left">
@@ -22,16 +22,22 @@ export default function HomePage() {
                     </div>
 
                     {/* 2. 버튼 영역: 아이콘 추가 및 그룹 호버 효과 */}
-                    <div className="mt-10 md:mt-0 md:ml-10 lg:ml-auto md:mb-12 lg:mb-4 w-full md:w-auto flex justify-start">
+                    <div className="mt-10 md:mt-0 md:ml-10 lg:ml-auto md:mb-12 lg:mb-4 w-full md:w-auto flex justify-start max-w-full">
                         <a
                             href="/posts"
-                            className="group inline-flex items-center gap-2 px-10 py-4 border-2 border-foreground
-                       bg-foreground text-background text-base font-bold uppercase
-                       transition-colors duration-200 hover:bg-transparent hover:text-foreground"
+                            className="group relative inline-flex items-center gap-2 px-6 sm:px-10 py-4 border-2 border-foreground
+                       bg-foreground text-background text-sm sm:text-base font-bold uppercase
+                       overflow-hidden whitespace-nowrap max-w-full"
                         >
-                            Start Building Now
-                            {/* 호버 시 화살표가 오른쪽으로 살짝 움직이는 애니메이션 추가 */}
-                            <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                            {/* Highlighter fill background - slides in from left on hover */}
+                            <span
+                                className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                                aria-hidden="true"
+                            />
+                            <span className="relative z-10">
+                                Start Building Now
+                            </span>
+                            <ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
                         </a>
                     </div>
 
