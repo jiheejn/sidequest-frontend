@@ -57,9 +57,7 @@ export function NavBar() {
                             />
                             <Plus className="relative z-10 h-4 w-4" />
                             <span className="relative z-10 hidden sm:inline">
-                                <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
-                                    New Project
-                                </span>
+                                New Project
                             </span>
                         </button>
 
@@ -70,34 +68,20 @@ export function NavBar() {
                             <div className="flex items-center gap-2">
                                 <Link
                                     href="/login"
-                                    className="group relative px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background
-                                             overflow-hidden"
+                                    className="group px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background"
                                 >
-                                    <span
-                                        className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
-                                        aria-hidden="true"
-                                    />
-                                    <span className="relative z-10">
-                                        <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
-                                            Login
-                                        </span>
+                                    <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                        Login
                                     </span>
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="group relative px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background
-                                             overflow-hidden"
+                                    className="group px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background"
                                 >
-                                    <span
-                                        className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
-                                        aria-hidden="true"
-                                    />
-                                    <span className="relative z-10">
-                                        <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
-                                            Sign Up
-                                        </span>
+                                    <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                        Sign Up
                                     </span>
                                 </Link>
                             </div>

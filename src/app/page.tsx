@@ -34,11 +34,8 @@ export default function HomePage() {
                                 className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
                                 aria-hidden="true"
                             />
-                            {/* Button text with underline effect */}
                             <span className="relative z-10">
-                                <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_3px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_3px] pb-0.5">
-                                    Start Building Now
-                                </span>
+                                Start Building Now
                             </span>
                             <ArrowRight className="relative z-10 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
                         </a>
