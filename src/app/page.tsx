@@ -26,7 +26,7 @@ export default function HomePage() {
                         <a
                             href="/posts"
                             className="group relative inline-flex items-center gap-2 px-10 py-4 border-2 border-foreground
-                       bg-transparent text-foreground text-base font-bold uppercase
+                       bg-foreground text-background text-base font-bold uppercase
                        overflow-hidden"
                         >
                             {/* Highlighter fill background - slides in from left on hover */}

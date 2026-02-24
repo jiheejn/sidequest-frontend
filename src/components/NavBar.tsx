@@ -35,21 +35,32 @@ export function NavBar() {
                         {/* Find Project Link */}
                         <Link
                             href="/posts"
-                            className="px-4 py-2 text-sm font-medium text-foreground
-                                     hover:text-primary transition-colors"
+                            className="group relative px-4 py-2 text-sm font-medium text-foreground overflow-hidden"
                         >
-                            Find Project
+                            <span className="relative z-10">
+                                <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-400 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                    Find Project
+                                </span>
+                            </span>
                         </Link>
 
                         {/* New Project Button */}
                         <button
                             onClick={handleNewPost}
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg
+                            className="group relative flex items-center gap-2 px-3 py-2 rounded-lg
                                      bg-transparent border border-foreground/50 text-foreground text-sm font-medium
-                                     hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-200"
+                                     overflow-hidden transition-all duration-200"
                         >
-                            <Plus className="h-4 w-4" />
-                            <span className="hidden sm:inline">New Project</span>
+                            <span
+                                className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
+                                aria-hidden="true"
+                            />
+                            <Plus className="relative z-10 h-4 w-4" />
+                            <span className="relative z-10 hidden sm:inline">
+                                <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                    New Project
+                                </span>
+                            </span>
                         </button>
 
                         {/* Auth Buttons / Avatar Dropdown */}
@@ -59,19 +70,35 @@ export function NavBar() {
                             <div className="flex items-center gap-2">
                                 <Link
                                     href="/login"
-                                    className="px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background /* 흰색 배경, 검은 글씨 */
-                                             hover:bg-foreground/80 transition-colors"
+                                    className="group relative px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background
+                                             overflow-hidden"
                                 >
-                                    Login
+                                    <span
+                                        className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="relative z-10">
+                                        <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                            Login
+                                        </span>
+                                    </span>
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-primary text-primary-foreground /* 보라색 배경, 흰 글씨 */
-                                             hover:bg-primary/80 transition-colors"
+                                    className="group relative px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background
+                                             overflow-hidden"
                                 >
-                                    Sign Up
+                                    <span
+                                        className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
+                                        aria-hidden="true"
+                                    />
+                                    <span className="relative z-10">
+                                        <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
+                                            Sign Up
+                                        </span>
+                                    </span>
                                 </Link>
                             </div>
                         )}
