@@ -117,10 +117,16 @@
 }
 
 @layer base {
-    * {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
         @apply border-border outline-ring/50;
     }
+    html,
     body {
+        overflow-x: hidden;
+        max-width: 100%;
         @apply bg-background text-foreground;
     }
 }

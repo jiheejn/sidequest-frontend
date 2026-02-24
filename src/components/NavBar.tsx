@@ -31,11 +31,11 @@ export function NavBar() {
                     </Link>
 
                     {/* Right - Navigation */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-1 sm:gap-4 min-w-0 shrink">
                         {/* Find Project Link */}
                         <Link
                             href="/posts"
-                            className="group relative px-4 py-2 text-sm font-medium text-foreground overflow-hidden"
+                            className="group relative px-2 sm:px-4 py-2 text-sm font-medium text-foreground overflow-hidden whitespace-nowrap"
                         >
                             <span className="relative z-10">
                                 <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-400 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
@@ -47,9 +47,9 @@ export function NavBar() {
                         {/* New Project Button */}
                         <button
                             onClick={handleNewPost}
-                            className="group relative flex items-center gap-2 px-3 py-2 rounded-lg
+                            className="group relative flex items-center gap-2 px-2 sm:px-3 py-2 rounded-lg
                                      bg-transparent border border-foreground/50 text-foreground text-sm font-medium
-                                     overflow-hidden transition-all duration-200"
+                                     overflow-hidden transition-all duration-200 whitespace-nowrap shrink-0"
                         >
                             <span
                                 className="absolute inset-0 bg-[#a1f27b] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 rounded-lg"
@@ -65,11 +65,11 @@ export function NavBar() {
                         {isAuthenticated ? (
                             <AvatarDropdown />
                         ) : (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 sm:gap-2">
                                 <Link
                                     href="/login"
-                                    className="group px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background"
+                                    className="group px-2 sm:px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background whitespace-nowrap shrink-0"
                                 >
                                     <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
                                         Login
@@ -77,8 +77,8 @@ export function NavBar() {
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="group px-4 py-2 rounded-lg text-sm font-medium
-                                             bg-foreground text-background"
+                                    className="group px-2 sm:px-4 py-2 rounded-lg text-sm font-medium
+                                             bg-foreground text-background whitespace-nowrap shrink-0"
                                 >
                                     <span className="bg-[linear-gradient(#a1f27b,#a1f27b)] bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px] pb-0.5">
                                         Sign Up
