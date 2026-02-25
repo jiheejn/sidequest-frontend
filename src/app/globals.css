@@ -42,7 +42,7 @@
 /* 라이트 모드 테마 (기본, DesignWave 스타일 아님) */
 :root {
     /* 기본 배경 및 텍스트 (요청하신 #f9f3db 기반) */
-    --background: oklch(0.96 0.02 90);      /* #f9f3db (warm butter beige) */
+    --background: #fffbd8;
     --foreground: oklch(0.12 0 0);          /* #1a1a1a (완전 검정보다 깊이 있는 먹색) */
 
     /* 카드 및 팝업 (흰색에 가까운 베이지로 대비감 부여) */
